@@ -1,3 +1,15 @@
+'''
+ * Autores:
+    - Fernanda Esquivel - 21542
+    - Adrian Fulladolsa - 21569
+    - Elías Alvarado - 21808
+ * Nombre: Ejercici21_ByC.py
+ * Lenguaje: Python
+ * Recursos: VSCode
+ * Historial:
+    - Creado el 13.04.2024
+    - Modificado el 13.04.2024
+'''
 import numpy as np
 import matplotlib.pyplot as plt
 
