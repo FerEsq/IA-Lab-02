@@ -17,7 +17,6 @@ import random
 
 p = 0.3
 
-# Crear el grafo
 G = nx.DiGraph()
 edges = [
     ('A', 'B'), ('A', 'C'), ('B', 'D'), ('C', 'D'), ('D', 'E'), ('D', 'H'),
@@ -47,5 +46,4 @@ def simulate_walk(graph, start, end, block_prob):
     
     return path
 
-# Simular un recorrido desde A hasta J
 print(simulate_walk(G, 'A', 'J', p))

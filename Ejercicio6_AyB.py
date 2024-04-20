@@ -16,7 +16,7 @@ import random
 import matplotlib.pyplot as plt
 
 
-p = 0.3
+p = 0.2
 G = nx.DiGraph()
 edges = [
     ('A', 'B'), ('A', 'C'), ('B', 'D'), ('C', 'D'), ('D', 'E'), ('D', 'H'),
@@ -28,6 +28,8 @@ def simulate_walk_fixed_steps(graph, start, end, block_prob, max_steps):
     path = [start]
     current = start
     steps = 0
+    steps_to_J = 0
+    J_found = False
     
     for _ in range(max_steps):
         if current == end:
@@ -44,8 +46,12 @@ def simulate_walk_fixed_steps(graph, start, end, block_prob, max_steps):
             path.append(next_node)
             current = next_node
             steps += 1
+            if not J_found and current == end:
+                steps_to_J = steps
+                J_found = True
+            
     
-    return steps, current, path
+    return steps_to_J, current,path
 
 N = 10000  
 M = 15    
@@ -55,8 +61,7 @@ final_positions = {}
 
 for _ in range(N):
     steps, final_node, path = simulate_walk_fixed_steps(G, 'A', 'J', p, M)
-    if final_node == 'J':
-        steps_to_J.append(steps)
+    steps_to_J.append(steps)
     if final_node in final_positions:
         final_positions[final_node] += 1
     else:

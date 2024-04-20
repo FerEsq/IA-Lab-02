@@ -11,7 +11,7 @@
     - Modificado el 13.04.2024
 '''
 import networkx as nx
-import numpy as np
+import matplotlib.pyplot as plt
 import random
 
 
@@ -34,7 +34,7 @@ def simulate_walk_no_return(graph, start, end, block_prob):
         open_neighbors = [node for node in forward_neighbors if random.random() > block_prob]
         
         if not open_neighbors:
-            break
+            return None
         else:
             next_node = random.choice(open_neighbors)
         
@@ -43,4 +43,18 @@ def simulate_walk_no_return(graph, start, end, block_prob):
     
     return path
 
-print(simulate_walk_no_return(G, 'A', 'J', p))
+pasos_a_j=[]
+for _ in range(0,10000):
+    pasos = simulate_walk_no_return(G, 'A', 'J', p)
+    if pasos != None:
+        pasos_a_j.append(len(pasos))
+
+
+plt.figure(figsize=(10, 5))
+plt.hist(pasos_a_j, bins=range(1, max(pasos_a_j) + 2), align='left', color='blue', rwidth=0.8)
+plt.title('Distribución del número de pasos hasta llegar a J')
+plt.xlabel('Número de pasos')
+plt.ylabel('Frecuencia')
+plt.xticks(range(1, max(pasos_a_j) + 1))
+plt.grid(True)
+plt.show()
